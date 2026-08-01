@@ -60,4 +60,46 @@ Normally, Windows measures repeat speeds in sluggish milliseconds. But changing 
 ## 🛠️ Summary & Performance Note
 1. **The Keyboard Tweaks Use Zero CPU Power:** Changing your `KeyboardDataQueueSize` to 64 or 96 simply opens up a wider memory buffer. It does not force your processor to work harder. Your CPU processes keyboard packets in less than a microsecond, so these adjustments take less then 0.0002ms measurable toll on your PC hardware.
 
+
+
+
+
+---
+
+## 🛑 How to Revert to Factory Windows Defaults
+
+If you ever experience issues or want to restore your computer's original factory keyboard settings, you can create a single-click backup file.
+
+### Option A: The One-Click Restore Script
+1. Right-click on your desktop, select **New** > **Text Document**.
+2. Copy and paste the exact text block below into the file:
+
+```text
+Windows Registry Editor Version 5.00
+
+[HKEY_CURRENT_USER\Control Panel\Accessibility\Keyboard Response]
+"AutoRepeatDelay"="1000"
+"AutoRepeatRate"="500"
+"DelayBeforeAcceptance"="1000"
+"Flags"="126"
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\kbdclass\Parameters]
+"KeyboardDataQueueSize"=dword:00000032
+```
+
+3. Click **File** > **Save As...**
+4. Change the *Save as type* dropdown to **All Files (*.*)**.
+5. Name the file **`RestoreDefaults.reg`** (ensure it ends in `.reg`) and click Save.
+6. Double-click the file on your desktop, accept the Windows security prompt, and **restart your PC**.
+
+### Option B: Manual Revert Checklist
+If you prefer to change them back manually inside `regedit`, restore these original default entries (ensure the Base is set to **Decimal** when typing values for `KeyboardDataQueueSize`):
+
+* `AutoRepeatDelay` ➡️ `"1000"`
+* `AutoRepeatRate` ➡️ `"500"`
+* `DelayBeforeAcceptance` ➡️ `"1000"`
+* `Flags` ➡️ `"126"`
+* `KeyboardDataQueueSize` ➡️ `50` *(Displayed as Hexadecimal `32` or Decimal `50`)*
+
+
 ## MADE IN BASH WITH <3 FROM RNG
