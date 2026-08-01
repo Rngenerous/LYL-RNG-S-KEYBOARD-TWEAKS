@@ -1,1 +1,63 @@
 # LYL-RNG-S-KEYBOARD-TWEAKS
+
+# LYL RNG'S KEYBOARD TWEAKS (WITH EXPLANATIONS)
+
+---
+
+## 1. The "Data Queue Size" Tweak (Fixes Missed Builds)
+By default, Windows allocates a tiny data buffer for keyboard signals. When you are rapidly executing complex mechanical sequences (e.g., executing a double-edit, placing a wall, and pulling out your shotgun in a fraction of a second), Windows can drop or slightly delay a keystroke because the buffer overflowed. 
+
+### How to apply it:
+1. Press `Win + R`, type `regedit`, and hit **Enter**.
+2. Navigate to: `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\kbdclass\Parameters`
+3. Look for `KeyboardDataQueueSize`.
+4. Double-click it, change the base to **Decimal**, and change the value from the default (usually 50) to **64**.
+
+* **What It Actually Does?** Think of your keyboard inputs like cars on a highway leading to Fortnite. `KeyboardDataQueueSize` is the number of lanes on that highway. The default setting (50) only gives Windows 50 lanes. If you press a massive sequence of keys during a box fight, the highway fills up instantly. Any extra keypresses get dropped or delayed until a lane opens up. Increasing it to 64 or 96 widens the highway. It gives Windows a larger buffer area to hold your rapid keystrokes so every single click registers in the exact millisecond you pressed it.
+* **The Result:** This broadens the processing buffer from 32bit to 128bit entirely preventing inputs during heavy macro strain. Data overload only happens if you hold a key down for a long time (like holding W to run across the map).
+
+---
+
+## (BEYOND HERE IS WIP)
+
+---
+
+## 2. The "FilterKeys" Tweak (Removes Key-Repeat Delay)
+Windows naturally adds a built-in delay buffer when a key is pressed down or repeated. While standard settings in the Windows Control Panel only allow you to turn this down to a certain point, the Registry allows you to force it to absolute zero. This is crucial for instantly registering consecutive movement taps or keeping turbo-build structures perfectly continuous.
+
+### How to apply it:
+1. In the Registry Editor, navigate to: `HKEY_CURRENT_USER\Control Panel\Accessibility\Keyboard Response`
+2. Update the following string values exactly as follows:
+
+#### ⏱️ `AutoRepeatDelay = 200` *(or 150 for ultra-fast response - 8 cores reccomended)*
+* **The Windows Default (1000):** Windows forces a massive 1-second delay before it registers that a key is being held down (not pressed but held down). yikes ikr. While you won't notice this just running forward, it creates major micro-stalls when you hold a key to pull off consecutive edits, select multiple build pieces, or hold down a weapon slot key.
+* **The Tweak (200):** Dropping this value to 200 milliseconds slashes that pause timer by 80%. It makes the transition from your very first tap to a held-down action nearly instantaneous.
+
+⚠️ **Why Not Set It to Zero?**
+You might think setting it to 0 would give you the ultimate speed, but never set it to 0. If you drop `AutoRepeatDelay` to 0, Windows completely eliminates the pause timer. The absolute millisecond you touch any key, it will instantly repeat it dozens of times. If you try to tap your wall bind once, you might accidentally place two or three walls, wasting mats. If you try to type a single letter in the game chat or Discord, your screen will look like this: `wwwwwaaaaassssdddd`.
+
+#### 🏎️ `AutoRepeatRate = 6`
+Now that you understand the delay timer, `AutoRepeatRate` controls what happens after that timer ends. It dictates how fast Windows repeats the key signal while you continue to hold it down.
+
+When you are executing a fast tunneling sequence or a protected side-jump: You tap your floor bind (`AutoRepeatDelay` ensures it registers instantly). You hold it for a split second to catch your floor grid. `AutoRepeatRate = 6` keeps the placement stream moving perfectly smoothly. It ensures your builds place without a single millisecond of hesitation, but it doesn't flood your CPU with useless duplicate data packets.
+
+* **Zero FPS Drops:** Your CPU handles this clean data speed easily. It prevents the massive input traffic jams that cause micro-stutters during intense endgames.
+
+#### ⚡ `DelayBeforeAcceptance = 0`
+This the most important setting in this entire folder for a pro player. It tells Windows to completely turn off its built-in safety filter and register your keypresses instantly. Think of it as the ultimate windows input bypass.
+      
+* 🛡️ **Why Windows Defaults to 1000:** Out of the box, Windows sets this to 1000 (a full 1-second delay). This is an accessibility feature called "FilterKeys." It is designed for people with hand tremors or typing difficulties. It tells the computer: *"If the user accidentally bumps a key for a split second, ignore it. Only register the key if they hold it down firmly for a full second."* 
+* If you leave this at the default setting, Windows is constantly running every single keystroke through a slow "filtering" background check.
+
+#### ⚙️ `Flags = 59`
+Normally, Windows measures repeat speeds in sluggish milliseconds. But changing your `Flags` to 59 tells Windows to completely change its math engine. It stops using standard time delays and starts counting in raw engine ticks per second.
+
+* **Lower Number = Faster & Cleaner:** Setting this tells Windows to execute a tight, hyper-responsive data loop. It matches your hardware's speed perfectly without causing any input lag.
+* **The Result:** This completely strips away the standard Windows OS key-repeat latency buffer. The second you tap a key, the command is instantly deployed to the game engine. 
+
+---
+
+## 🛠️ Summary & Performance Note
+1. **The Keyboard Tweaks Use Zero CPU Power:** Changing your `KeyboardDataQueueSize` to 64 or 96 simply opens up a wider memory buffer. It does not force your processor to work harder. Your CPU processes keyboard packets in less than a microsecond, so these adjustments take less then 0.0002ms measurable toll on your PC hardware.
+
+## MADE IN BASH WITH <3 FROM RNG
