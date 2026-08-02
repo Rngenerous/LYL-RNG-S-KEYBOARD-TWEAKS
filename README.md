@@ -46,6 +46,10 @@ This the most important setting in this entire folder for a pro player. It tells
 #### ⚙️ `Flags = 59`
 Normally, Windows measures repeat speeds in sluggish milliseconds. But changing your `Flags` to 59 tells Windows to completely change its math engine. It stops using standard time delays and starts counting in raw engine ticks per second.
 
+In the Windows Registry, the value 59 is a bitmask mathematical configuration. It tells Windows exactly which individual FilterKeys features to turn on or off by combining their assigned numbers.
+
+Windows reads the number 59 as a sum of specific configuration "switches" (bits):1 (FKF_FILTERKEYSON): Turns the FilterKeys system On. 2 (FKF_AVAILABLE): Makes the feature Available to the OS. 8 (FKF_CLICKONKEY): Makes a click sound when a key is pressed (often combined or left as a placeholder flag). 16 (FKF_TWOKEYSOFF): Automatically turns FilterKeys off if two keys are held at once. 32 (FKF_INDICATOR): Shows the FilterKeys Icon on your taskbar.When you add these values together (1 + 2 + 8 + 16 + 32), you get 59.By calculating this exact total, Windows activates the background accessibility system. This system bypasses the default Control Panel limits and forces the OS to read your custom, ultra-fast `AutoRepeatRate` and `AutoRepeatDelay` millisecond parameters directly.
+
 * **Lower Number = Faster & Cleaner:** Setting this tells Windows to execute a tight, hyper-responsive data loop. It matches your hardware's speed perfectly without causing any input lag.
 * **The Result:** This completely strips away the standard Windows OS key-repeat latency buffer. The second you tap a key, the command is instantly deployed to the game engine. 
 
