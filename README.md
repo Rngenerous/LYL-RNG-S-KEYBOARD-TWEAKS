@@ -16,11 +16,7 @@ By default, Windows allocates a tiny data buffer for keyboard signals. When you 
 * **What It Actually Does?** Think of your keyboard inputs like cars on a highway leading to Fortnite. `KeyboardDataQueueSize` is the number of lanes on that highway. The default setting (50) only gives Windows 50 lanes. If you press a massive sequence of keys during a box fight, the highway fills up instantly. Any extra keypresses get dropped or delayed until a lane opens up. Increasing it to 64 or 96 widens the highway. It gives Windows a larger buffer area to hold your rapid keystrokes so every single click registers in the exact millisecond you pressed it.
 * **The Result:** This broadens the processing buffer from 32bit to 128bit entirely preventing inputs during heavy macro strain. Data overload only happens if you hold a key down for a long time (like holding W to run across the map).
 
----
 
-## (BEYOND HERE IS WIP)
-
----
 
 ## 2. The "FilterKeys" Tweak (Removes Key-Repeat Delay)
 Windows naturally adds a built-in delay buffer when a key is pressed down or repeated. While standard settings in the Windows Control Panel only allow you to turn this down to a certain point, the Registry allows you to force it to absolute zero. This is crucial for instantly registering consecutive movement taps or keeping turbo-build structures perfectly continuous.
