@@ -30,10 +30,10 @@ Windows naturally adds a built-in delay buffer when a key is pressed down or rep
 ⚠️ **Why Not Set It to Zero?**
 You might think setting it to 0 would give you the ultimate speed, but never set it to 0. If you drop `AutoRepeatDelay` to 0, Windows completely eliminates the pause timer. The absolute millisecond you touch any key, it will instantly repeat it dozens of times. If you try to tap your wall bind once, you might accidentally place two or three walls, wasting mats. If you try to type a single letter in the game chat or Discord, your screen will look like this: `wwwwwaaaaassssdddd`.
 
-#### 🏎️ `AutoRepeatRate = 6`
+#### 🏎️ `AutoRepeatRate = 12`
 Now that you understand the delay timer, `AutoRepeatRate` controls what happens after that timer ends. It dictates how fast Windows repeats the key signal while you continue to hold it down.
 
-When you are executing a fast tunneling sequence or a protected side-jump: You tap your floor bind (`AutoRepeatDelay` ensures it registers instantly). You hold it for a split second to catch your floor grid. `AutoRepeatRate = 6` keeps the placement stream moving perfectly smoothly. It ensures your builds place without a single millisecond of hesitation, but it doesn't flood your CPU with useless duplicate data packets.
+When you are executing a fast tunneling sequence or a protected side-jump: You tap your floor bind (`AutoRepeatDelay` ensures it registers instantly). You hold it for a split second to catch your floor grid. `AutoRepeatRate = 12` keeps the placement stream moving perfectly smoothly. It ensures your builds place without a single millisecond of hesitation, but it doesn't flood your CPU with useless duplicate data packets.
 
 * **Zero FPS Drops:** Your CPU handles this clean data speed easily. It prevents the massive input traffic jams that cause micro-stutters during intense endgames.
 
