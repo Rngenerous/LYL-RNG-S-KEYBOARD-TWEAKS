@@ -96,7 +96,7 @@ If you prefer to change them back manually inside `regedit`, restore these origi
 * `AutoRepeatDelay` ➡️ `"1000"`
 * `AutoRepeatRate` ➡️ `"500"`
 * `DelayBeforeAcceptance` ➡️ `"1000"`
-* `Flags` ➡️ `"126"`
+* `Flags` ➡️ `"126 or 114"`
 * `KeyboardDataQueueSize` ➡️ `50` *(Displayed as Hexadecimal `32` or Decimal `50`)*
 
 
