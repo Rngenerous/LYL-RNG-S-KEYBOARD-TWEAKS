@@ -9,10 +9,10 @@ By default, Windows allocates a tiny data buffer for keyboard signals. When you 
 1. Press `Win + R`, type `regedit`, and hit **Enter**.
 2. Navigate to: `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\kbdclass\Parameters`
 3. Look for `KeyboardDataQueueSize`.
-4. Double-click it, change the base to **Decimal**, and change the value from the default (usually 50) to **64**.
+4. Double-click it, change the base to **Decimal**, and assure the value is set to 100.
 
-* **What It Actually Does?** Think of your keyboard inputs like cars on a highway leading to Fortnite. `KeyboardDataQueueSize` is the number of lanes on that highway. The default setting (50) only gives Windows 50 lanes. If you press a massive sequence of keys during a box fight, the highway fills up instantly. Any extra keypresses get dropped or delayed until a lane opens up. Increasing it to 64 or 96 widens the highway. It gives Windows a larger buffer area to hold your rapid keystrokes so every single click registers in the exact millisecond you pressed it.
-* **The Result:** This broadens the processing buffer from 32bit to 128bit entirely preventing inputs during heavy macro strain. Data overload only happens if you hold a key down for a long time (like holding W to run across the map).
+* **Leave "KeyboardDataQueueSize" at Default (100)The Setting: HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\kbdclass\Parameters → KeyboardDataQueueSizeThe Value: Leave at 100 (Decimal).The Real Reason: Modern versions of Windows use 100 as the default to handle modern high-speed gaming keyboards (like 1,000Hz to 8,000Hz polling rates). If you lower this to 64 or 50 based on old internet myths, you actually shrink your data buffer by up to 50%. Under heavy game load or intensive endgame scrims, a tiny queue will overflow, causing your keyboard inputs to jam, freeze, or drop completely. Leaving it at 100 ensures your system has a massive, stable runway to process fast sequences cleanly.** *
+
 
 
 
